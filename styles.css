@@ -33,7 +33,7 @@ canvas {
 /* Styles for screens smaller than 768px (typical mobile screens) */
 @media (max-width: 768px){
     #logo {
-        width: 25vw;
+        width: 35vw;
         top: 5px;
         right: 5px;
     }
