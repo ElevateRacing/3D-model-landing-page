@@ -1,7 +1,7 @@
 body {
     margin: 0;
     background-color: white;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Helvetica', sans-serif;
 }
 canvas {
     width: 100%;
@@ -10,18 +10,18 @@ canvas {
 }
 #logo {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 50px;
+    right: 50px;
     width: 100px;
     height: auto;
 }
 #text-overlay {
     position: absolute;
-    top: 20px;
+    top: 100px;
     left: 50%;
     transform: translateX(-50%);
     color: black;
-    font-size: 24px;
+    font-size: 34px;
     font-family: 'FORMULA1-BOLD', sans-serif;
     white-space: nowrap;
 }
