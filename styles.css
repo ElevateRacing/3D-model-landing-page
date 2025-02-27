@@ -18,9 +18,9 @@ header {
 
 .logo {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    max-width: 100px;
+    top: 20px;
+    right: 20px;
+    max-width: 150px;
     height: auto;
 }
 
