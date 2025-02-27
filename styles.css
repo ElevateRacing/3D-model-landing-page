@@ -25,14 +25,20 @@ canvas {
     font-family: 'Arial Black', sans-serif;
     white-space: nowrap;
 }
-
-@media (max-width: 768px){
-    #text-overlay {
-        font-size: 6vw;
-    }
-}
-
 @font-face {
     font-family: 'FORMULA1-BOLD';
     src: url('FORMULA1-BOLD.otf') format('opentype');
+}
+
+/* Styles for screens smaller than 768px (typical mobile screens) */
+@media (max-width: 768px){
+    #logo {
+        width: 25vw;
+        top: 5px;
+        right: 5px;
+    }
+    #text-overlay {
+        font-size: 6vw;
+        top: 10px;
+    }
 }
