@@ -103,9 +103,29 @@ body {
 
 #right-text {
     grid-area: right;
-    padding: 10px;
+    padding: 30px;
+    padding-top: 100px;
     min-width: 0;
-    word-wrap: break-word;
+    word-wrap: nowrap;
+    font-size: 18px;
+}
+
+#right-text .regular {
+    font-family: 'FORMULA1-REGULAR', sans-serif;
+    color: #595959;
+}
+
+#right-text .bold {
+    font-family: 'FORMULA1-BOLD', sans-serif;
+    color: #404040;
+}
+
+#right-text .separator {
+    border: 0;
+    height: 2px;
+    background: #D0CECE;
+    width: 150px;
+    margin: 50px 0;
 }
 
 #bottom-text {
