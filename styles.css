@@ -29,7 +29,7 @@ body {
         "top top top"
         "left canvas right"
         "bottom bottom bottom";
-    grid-template-columns: minmax(100px, auto) 1fr minmax(100px, auto); /* Left, canvas, right */
+    grid-template-columns: minmax(200px, auto) 1fr minmax(100px, auto); /* Left, canvas, right */
     grid-template-rows: auto auto 1fr auto; /* Logo, top, canvas, bottom */
     gap: 10px;
     width: 100%;
