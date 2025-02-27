@@ -9,10 +9,13 @@ container.appendChild(renderer.domElement);
 
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
+// Restrict zoom
+controls.minDistance = 5; // Minimum zoom distance
+controls.maxDistance = 20; // Maximum zoom distance
+
 const loader = new THREE.OBJLoader();
 loader.load('FreeCad_98.obj', function (object) {
     scene.add(object);
-    // Optionally, center the model and adjust camera position.
     const boundingBox = new THREE.Box3().setFromObject(object);
     const center = boundingBox.getCenter(new THREE.Vector3());
     object.position.sub(center);
@@ -20,13 +23,11 @@ loader.load('FreeCad_98.obj', function (object) {
     controls.update();
 });
 
-const ambientLight = new THREE.AmbientLight(0x404040); // Soft white light
+const ambientLight = new THREE.AmbientLight(0x404040);
 scene.add(ambientLight);
 
 const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
 scene.add( directionalLight );
-
-camera.position.z = 5;
 
 function animate() {
     requestAnimationFrame(animate);
@@ -38,10 +39,7 @@ animate();
 window.addEventListener('resize', onWindowResize, false);
 
 function onWindowResize(){
-
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-
     renderer.setSize( window.innerWidth, window.innerHeight );
-
 }
