@@ -14,7 +14,7 @@ body {
         "top top top"
         "left canvas right"
         "bottom bottom bottom";
-    grid-template-columns: minmax(0, auto) 1fr minmax(0, auto); /* Left, canvas, right */
+    grid-template-columns: minmax(100px, auto) 1fr minmax(100px, auto); /* Left, canvas, right */
     grid-template-rows: auto auto 1fr auto; /* Logo, top, canvas, bottom */
     gap: 10px;
     width: 100%;
@@ -28,6 +28,7 @@ body {
     display: flex;
     justify-content: flex-end;
     padding: 10px;
+    min-width: 0;
 }
 
 #top-text {
@@ -61,7 +62,7 @@ body {
     padding: 10px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
     #wrapper {
         grid-template-areas:
             "logo"
