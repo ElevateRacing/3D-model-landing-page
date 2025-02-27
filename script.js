@@ -8,27 +8,42 @@ const container = document.getElementById('canvas-container');
 renderer.setSize(container.clientWidth, container.clientHeight);
 container.appendChild(renderer.domElement);
 
-// Add lighting (improved setup)
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Slightly brighter soft light
+// Add enhanced lighting setup
+// Ambient light for base illumination
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.4); // Soft base light
 scene.add(ambientLight);
 
-// Fixed directional light (simulates a sun-like source)
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); // Brighter direct light
-directionalLight.position.set(5, 10, 7.5); // Fixed position above and to the side
-directionalLight.target = new THREE.Object3D(); // Create a target for the light
-directionalLight.target.position.set(0, 0, 0); // Point it at the origin (center of object)
-scene.add(directionalLight);
-scene.add(directionalLight.target); // Add target to scene
+// Multiple directional lights for even coverage
+const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.7); // Primary light
+directionalLight1.position.set(5, 10, 5); // Above and to the side
+scene.add(directionalLight1);
+
+const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.5); // Secondary light
+directionalLight2.position.set(-5, 5, -5); // Opposite direction
+scene.add(directionalLight2);
+
+const directionalLight3 = new THREE.DirectionalLight(0xffffff, 0.3); // Fill light
+directionalLight3.position.set(0, -5, 5); // From below
+scene.add(directionalLight3);
+
+// Optional: Add a point light for extra brightness
+const pointLight = new THREE.PointLight(0xffffff, 0.5, 50); // Omni-directional light
+pointLight.position.set(0, 5, 5); // Near the object
+scene.add(pointLight);
 
 // Load the OBJ file
 const loader = new THREE.OBJLoader();
 loader.load(
     'FreeCad_98.obj', // Replace with your OBJ file's name
     (object) => {
-        // Apply a basic material if no material is provided
+        // Apply a material with better light response
         object.traverse((child) => {
             if (child.isMesh) {
-                child.material = new THREE.MeshStandardMaterial({ color: 0x00ff00 }); // Green color
+                child.material = new THREE.MeshStandardMaterial({
+                    color: 0x00ff00, // Green color
+                    roughness: 0.7,  // Less shiny, more diffuse
+                    metalness: 0.1   // Slight reflectivity
+                });
             }
         });
 
