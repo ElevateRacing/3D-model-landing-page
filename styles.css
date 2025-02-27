@@ -7,9 +7,10 @@ body {
         "top logo"
         "left model right"
         "bottom . .";
-    grid-template-columns: auto 20%;
+    grid-template-columns: 25% auto 25%;
     grid-template-rows: auto auto auto;
     height: 100vh;
+    grid-gap: 10px;
 }
 
 canvas {
@@ -31,12 +32,15 @@ canvas {
     grid-area: model;
     justify-self: center;
     align-self: center;
+    padding: 5px;
+    margin: 5px;
 }
 
 #text-top {
     grid-area: top;
     text-align: center;
     padding: 20px;
+    font-family: 'Arial Black', sans-serif;
 }
 
 #text-left {
@@ -44,6 +48,7 @@ canvas {
     padding: 20px;
     text-align: center;
     align-self: center;
+    font-family: 'Arial Black', sans-serif;
 }
 
 #text-right {
@@ -51,17 +56,14 @@ canvas {
     padding: 20px;
     text-align: center;
     align-self: center;
+    font-family: 'Arial Black', sans-serif;
 }
 
 #text-bottom {
     grid-area: bottom;
     text-align: center;
     padding: 20px;
-}
-
-@font-face {
-    font-family: 'FORMULA1-BOLD';
-    src: url('FORMULA1-BOLD.otf') format('opentype');
+    font-family: 'Arial Black', sans-serif;
 }
 
 /* Responsive adjustments */
