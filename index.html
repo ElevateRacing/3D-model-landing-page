@@ -3,11 +3,37 @@
 <head>
     <title>3D Model Viewer</title>
     <style>
-        body { margin: 0; }
-        canvas { width: 100%; height: 100%; display: block; }
+        body {
+            margin: 0;
+            background-color: white; /* White background */
+            font-family: 'Arial', sans-serif; /* Default font, can be changed */
+        }
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        #logo {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 100px; /* Adjust as needed */
+            height: auto;
+        }
+        #text-overlay {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: black; /* Text color */
+            font-size: 24px; /* Adjust as needed */
+            font-family: 'YourSpecificFont', sans-serif; /* Replace with your font */
+            white-space: nowrap; /* Prevent text wrapping */
+        }
     </style>
 </head>
 <body>
+    <img id="logo" src="logo.png" alt="Logo"> <div id="text-overlay">Get ready for a new dimension of go-kart racing!</div>
     <div id="container"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://unpkg.com/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
