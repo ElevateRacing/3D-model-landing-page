@@ -8,12 +8,17 @@ const container = document.getElementById('canvas-container');
 renderer.setSize(container.clientWidth, container.clientHeight);
 container.appendChild(renderer.domElement);
 
-// Add lighting (needed for visibility of OBJ without materials)
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Soft light
+// Add lighting (improved setup)
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Slightly brighter soft light
 scene.add(ambientLight);
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5); // Direct light
-directionalLight.position.set(0, 1, 1);
+
+// Fixed directional light (simulates a sun-like source)
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); // Brighter direct light
+directionalLight.position.set(5, 10, 7.5); // Fixed position above and to the side
+directionalLight.target = new THREE.Object3D(); // Create a target for the light
+directionalLight.target.position.set(0, 0, 0); // Point it at the origin (center of object)
 scene.add(directionalLight);
+scene.add(directionalLight.target); // Add target to scene
 
 // Load the OBJ file
 const loader = new THREE.OBJLoader();
