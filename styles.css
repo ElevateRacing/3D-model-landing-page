@@ -18,7 +18,9 @@ body {
     grid-template-rows: auto auto 1fr auto; /* Logo, top, canvas, bottom */
     gap: 10px;
     width: 100%;
-    max-width: 1200px; /* Optional: limit total width */
+    max-width: 100%;
+    padding: 10px;
+    box-sizing: border-box; /* Ensure padding doesn't add to width */
 }
 
 #logo {
