@@ -72,6 +72,26 @@ body {
     word-wrap: break-word;
 }
 
+#left-text .regular {
+    font-family: 'FORMULA1-REGULAR', sans-serif;
+}
+
+#left-text .bold {
+    font-family: 'FORMULA1-BOLD', sans-serif;
+}
+
+#left-text .separator {
+    border: 0;
+    heigh: 2px;
+    background: #D0CECE;
+    width: 150px;
+    margin: 10px 0;
+}
+
+#left-text .spacer {
+    height: 20px;
+}
+
 #canvas-container {
     grid-area: canvas;
     height: 400px; /* Starting height, will be adjusted by JS */
