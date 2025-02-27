@@ -19,7 +19,18 @@ loader.load('FreeCad_98.obj', function (object) {
     const boundingBox = new THREE.Box3().setFromObject(object);
     const center = boundingBox.getCenter(new THREE.Vector3());
     object.position.sub(center);
+
+    // Adjust model scale (if needed)
+    // object.scale.set(0.5, 0.5, 0.5); // Example: Scale down by 50%
+
+    // Adjust camera position
     camera.position.z = boundingBox.getSize(new THREE.Vector3()).length() * 1.5;
+
+    // Further adjust camera position if needed
+    if(camera.position.z > 20){
+        camera.position.z = 20;
+    }
+
     controls.update();
 });
 
