@@ -76,16 +76,18 @@ body {
 
 #left-text .regular {
     font-family: 'FORMULA1-REGULAR', sans-serif;
+    color: #595959;
 }
 
 #left-text .bold {
     font-family: 'FORMULA1-BOLD', sans-serif;
+    color: #404040;
 }
 
 #left-text .separator {
     border: 0;
     heigh: 4px;
-    background: #D0CECE;
+    background: #404040;
     width: 150px;
     margin: 20px 0;
 }
@@ -112,7 +114,7 @@ body {
     padding: 10px;
     font-family: 'FORMULA1-REGULAR', sans-serif;
     color: #7F7F7F;
-    font-size: 30px;
+    font-size: 18px;
 }
 
 @media (max-width: 800px) {
