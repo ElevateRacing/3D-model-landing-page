@@ -12,7 +12,7 @@ canvas {
     position: absolute;
     top: 50px;
     right: 50px;
-    width: 150px;
+    width: 200px;
     height: auto;
 }
 #text-overlay {
@@ -22,7 +22,7 @@ canvas {
     transform: translateX(-50%);
     color: black;
     font-size: 34px;
-    font-family: 'FORMULA1-BOLD', sans-serif;
+    font-family: 'Arial Black', sans-serif;
     white-space: nowrap;
 }
 @font-face {
