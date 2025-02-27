@@ -70,8 +70,9 @@ body {
     padding: 30px;
     padding-top: 100px;
     min-width: 0;
-    word-wrap: nowrap;
+    word-wrap: break-word;
     font-size: 18px;
+    box-sizing: border-box;
 }
 
 #left-text .regular {
@@ -99,6 +100,8 @@ body {
 #canvas-container {
     grid-area: canvas;
     height: 400px; /* Starting height, will be adjusted by JS */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 #right-text {
@@ -106,8 +109,9 @@ body {
     padding: 30px;
     padding-top: 100px;
     min-width: 0;
-    word-wrap: nowrap;
+    word-wrap: break-word;
     font-size: 18px;
+    box-sizing: border-box;
 }
 
 #right-text .regular {

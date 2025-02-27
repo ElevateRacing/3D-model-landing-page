@@ -83,25 +83,13 @@ controls.maxDistance = 10;
 // Handle resize based on surrounding elements
 function resizeRenderer() {
     const totalWidth = wrapper.clientWidth;
-    const totalHeight = window.innerHeight; // Use viewport height as reference
     const leftWidth = leftText ? leftText.offsetWidth : 0;
     const rightWidth = rightText ? rightText.offsetWidth : 0;
-    const logoHeight = logo ? logo.offsetHeight : 0;
-    const topHeight = topText ? topText.offsetHeight : 0;
-    const bottomHeight = bottomText ? bottomText.offsetHeight : 0;
-    const padding = 40; // Account for grid gap and padding
-
-    // Calculate available width and height for canvas
     const canvasWidth = totalWidth - leftWidth - rightWidth;
-    const canvasHeight = totalHeight - logoHeight - topHeight - bottomHeight - padding;
-
-    // Set container dimensions
-    container.style.width = `${canvasWidth}px`;
-    container.style.height = `${canvasHeight}px`;
 
     // Update renderer and camera
-    renderer.setSize(canvasWidth, canvasHeight);
-    camera.aspect = canvasWidth / canvasHeight;
+    renderer.setSize(canvasWidth, container.clientHeight);
+    camera.aspect = canvasWidth / container.clientHeight;
     camera.updateProjectionMatrix();
 }
 
