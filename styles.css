@@ -14,7 +14,7 @@ body {
         "top top top"
         "left canvas right"
         "bottom bottom bottom";
-    grid-template-columns: auto 1fr auto; /* Left, canvas, right */
+    grid-template-columns: minmax(0, auto) 1fr minmax(0, auto); /* Left, canvas, right */
     grid-template-rows: auto auto 1fr auto; /* Logo, top, canvas, bottom */
     gap: 10px;
     width: 100%;
@@ -39,6 +39,8 @@ body {
 #left-text {
     grid-area: left;
     padding: 10px;
+    min-width: 0;
+    word-wrap: break-word;
 }
 
 #canvas-container {
@@ -49,10 +51,34 @@ body {
 #right-text {
     grid-area: right;
     padding: 10px;
+    min-width: 0;
+    word-wrap: break-word;
 }
 
 #bottom-text {
     grid-area: bottom;
     text-align: center;
     padding: 10px;
+}
+
+@media (max-width: 600px) {
+    #wrapper {
+        grid-template-areas:
+            "logo"
+            "top"
+            "canvas"
+            "left"
+            "right"
+            "bottom";
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto auto auto;
+    }
+
+    #logo {
+        justify-content: center;
+    }
+
+    #left-text, #right-text {
+        text-align: center;
+    }
 }
