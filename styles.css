@@ -12,6 +12,16 @@ body {
     src: url('FORMULA1-REGULAR.OTF') format('opentype');
 }
 
+@font-face {
+    font-family: 'FORMULA1-WIDE';
+    src: url('FORMULA1-WIDE.OTF') format('opentype');
+}
+
+@font-face {
+    font-family: 'FORMULA1-BOLD';
+    src: url('FORMULA1-BOLD.OTF') format('opentype');
+}
+
 #wrapper {
     display: grid;
     grid-template-areas:
@@ -40,6 +50,19 @@ body {
     grid-area: top;
     text-align: center;
     padding: 10px;
+    white-space: nowrap; /* Keep text on one line */
+}
+
+#top-text .first-word {
+    font-family: 'FORMULA1-WIDE', sans-serif;
+    color: #DF4949;
+    font-size: 40px;
+}
+
+#top-text .rest-words {
+    font-family: 'FORMULA1-BOLD', sans-serif;
+    color: #7f7f7f;
+    font-size: 40px;
 }
 
 #left-text {
