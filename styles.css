@@ -1,7 +1,7 @@
 body {
     margin: 0;
     background-color: white;
-    font-family: 'Helvetica', sans-serif;
+    font-family: 'Arial Black', sans-serif;
 }
 canvas {
     width: 100%;
@@ -12,7 +12,7 @@ canvas {
     position: absolute;
     top: 50px;
     right: 50px;
-    width: 100px;
+    width: 150px;
     height: auto;
 }
 #text-overlay {
