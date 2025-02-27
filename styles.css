@@ -67,10 +67,11 @@ body {
 
 #left-text {
     grid-area: left;
-    padding: 20px;
-    padding-top: 40px;
+    padding: 30px;
+    padding-top: 100px;
     min-width: 0;
-    word-wrap: break-word;
+    word-wrap: nowrap;
+    font-size: 18px;
 }
 
 #left-text .regular {
