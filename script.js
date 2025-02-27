@@ -35,13 +35,13 @@ const loader = new THREE.OBJLoader();
 loader.load(
     'FreeCad_98.obj', // Replace with your OBJ file's name
     (object) => {
-        // Apply a material with better light response
+        // Apply a material with better light response (aluminium)
         object.traverse((child) => {
             if (child.isMesh) {
                 child.material = new THREE.MeshStandardMaterial({
-                    color: 0x00ff00, // Green color
-                    roughness: 0.7,  // Less shiny, more diffuse
-                    metalness: 0.1   // Slight reflectivity
+                    color: 0xb0b0b0, // Light Silver-grey for alu
+                    roughness: 0.3,  // smooth, but not mirror like
+                    metalness: 0.9   // High, for metalic look
                 });
             }
         });
