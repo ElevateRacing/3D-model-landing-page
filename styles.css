@@ -9,7 +9,7 @@ body {
 
 @font-face {
     font-family: 'FORMULA1-REGULAR';
-    src: url('FORMULA1-REGULAR.otf') format('opentype');
+    src: url('FORMULA1-REGULAR.OTF') format('opentype');
 }
 
 #wrapper {
