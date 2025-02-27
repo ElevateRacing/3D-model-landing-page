@@ -22,12 +22,11 @@ canvas {
     transform: translateX(-50%);
     color: black;
     font-size: 4vw;
-    font-family: 'Arial Black', sans-serif;
+    font-family: 'Arial', sans-serif;
     white-space: nowrap;
 }
 @font-face {
-    font-family: 'FORMULA1-BOLD';
-    src: url('FORMULA1-BOLD.otf') format('opentype');
+    font-family: 'Arial';
 }
 
 /* Styles for screens smaller than 768px (typical mobile screens) */
