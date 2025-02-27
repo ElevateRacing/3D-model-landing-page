@@ -1,113 +1,55 @@
-* {
+body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
     min-height: 100vh;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-header {
-    position: relative;
+#wrapper {
+    display: grid;
+    grid-template-areas:
+        "logo logo logo"
+        "top top top"
+        "left canvas right"
+        "bottom bottom bottom";
+    grid-template-columns: auto 1fr auto; /* Left, canvas, right */
+    grid-template-rows: auto auto 1fr auto; /* Logo, top, canvas, bottom */
+    gap: 10px;
     width: 100%;
+    max-width: 1200px; /* Optional: limit total width */
+}
+
+#logo {
+    grid-area: logo;
+    text-align: center;
     padding: 10px;
 }
 
-.logo {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    max-width: 150px;
-    height: auto;
-}
-
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-}
-
-.text-top {
-    font-size: 2.5rem;
-    margin: 20px 0;
+#top-text {
+    grid-area: top;
     text-align: center;
+    padding: 10px;
 }
 
-.middle-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    margin: 20px 0;
-}
-
-.text-left, .text-right {
-    flex: 1;
-    font-size: 1.5rem;
-    text-align: center;
-    padding: 20px;
-}
-
-.threejs-container {
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+#left-text {
+    grid-area: left;
+    padding: 10px;
 }
 
 #canvas-container {
-    width: 100%;
-    max-width: 500px;
-    height: 400px;
-    background-color: #ffffff;
+    grid-area: canvas;
+    height: 400px; /* Starting height, will be adjusted by JS */
 }
 
-.text-bottom {
-    font-size: 1.5rem;
-    margin-top: 10px;
+#right-text {
+    grid-area: right;
+    padding: 10px;
+}
+
+#bottom-text {
+    grid-area: bottom;
     text-align: center;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .logo {
-        max-width: 80px;
-    }
-    .text-top {
-        font-size: 2rem;
-    }
-    .middle-section {
-        flex-direction: column;
-    }
-    .text-left, .text-right {
-        font-size: 1.2rem;
-        padding: 10px;
-    }
-    #canvas-container {
-        max-width: 100%;
-        height: 300px;
-    }
-    .text-bottom {
-        font-size: 1.2rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .logo {
-        max-width: 60px;
-    }
-    .text-top {
-        font-size: 1.5rem;
-    }
-    .text-left, .text-right {
-        font-size: 1rem;
-    }
-    #canvas-container {
-        height: 200px;
-    }
+    padding: 10px;
 }

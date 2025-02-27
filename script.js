@@ -1,65 +1,68 @@
 // Set up the scene, camera, and renderer
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000); // Aspect ratio set later
-const renderer = new THREE.WebGLRenderer();
+const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ antialias: true });
 const container = document.getElementById('canvas-container');
+const leftText = document.getElementById('left-text');
+const rightText = document.getElementById('right-text');
+const topText = document.getElementById('top-text');
+const bottomText = document.getElementById('bottom-text');
+const logo = document.getElementById('logo');
+const wrapper = document.getElementById('wrapper');
 
-// Adjust renderer size to container
+// Initial renderer size
 renderer.setSize(container.clientWidth, container.clientHeight);
-renderer.setClearColor(0xffffff, 1);
+renderer.setClearColor(0xffffff, 1); // White background
+renderer.autoClear = true;
 container.appendChild(renderer.domElement);
 
-// Ambient light for base illumination
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Soft base light
+// Add balanced lighting setup
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
 
-// Multiple directional lights for even coverage
-const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.3); // Primary light
-directionalLight1.position.set(5, 10, 5); // Above and to the side (front-right)
+const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.4);
+directionalLight1.position.set(5, 10, 5);
 scene.add(directionalLight1);
 
-const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.6); // Secondary light
-directionalLight2.position.set(-5, 5, -5); // Opposite direction (back-left)
+const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.6);
+directionalLight2.position.set(-5, 5, -5);
 scene.add(directionalLight2);
 
-const directionalLight3 = new THREE.DirectionalLight(0xffffff, 0.3); // Fill light
-directionalLight3.position.set(0, -5, 5); // From below-front
+const directionalLight3 = new THREE.DirectionalLight(0xffffff, 0.3);
+directionalLight3.position.set(0, -5, 5);
 scene.add(directionalLight3);
 
-// Optional: Add a point light for extra brightness
-const pointLight = new THREE.PointLight(0xffffff, 0.2, 50); // Omni-directional light
-pointLight.position.set(0, 5, 5); // Near the object
+const pointLight = new THREE.PointLight(0xffffff, 0.3, 50);
+pointLight.position.set(0, 5, 5);
 scene.add(pointLight);
 
 // Load the OBJ file
 const loader = new THREE.OBJLoader();
 loader.load(
-    'FreeCad_98.obj', // Replace with your OBJ file's name
+    'FreeCad_98.obj',
     (object) => {
-        // Apply a material with better light response (aluminium)
         object.traverse((child) => {
             if (child.isMesh) {
                 child.material = new THREE.MeshStandardMaterial({
-                    color: 0xb0b0b0, // Light Silver-grey for alu
-                    roughness: 0.3,  // smooth, but not mirror like
-                    metalness: 0.9   // High, for metalic look
+                    color: 0xb0b0b0,
+                    metalness: 0.9,
+                    roughness: 0.3
                 });
             }
         });
 
-        // Center and scale the model
         const box = new THREE.Box3().setFromObject(object);
         const center = box.getCenter(new THREE.Vector3());
         const size = box.getSize(new THREE.Vector3());
         const maxDim = Math.max(size.x, size.y, size.z);
-        const scale = 2 / maxDim; // Adjust scale to fit nicely
+        const scale = 2 / maxDim;
         object.scale.set(scale, scale, scale);
-        object.position.sub(center.multiplyScalar(scale)); // Center it
+        object.position.sub(center.multiplyScalar(scale));
 
         scene.add(object);
     },
     (xhr) => {
-        console.log((xhr.loaded / xhr.total * 100) + '% loaded'); // Progress
+        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
     },
     (error) => {
         console.error('An error occurred loading the OBJ:', error);
@@ -77,21 +80,46 @@ controls.screenSpacePanning = false;
 controls.minDistance = 2;
 controls.maxDistance = 10;
 
-// Handle window resize
+// Handle resize based on surrounding elements
 function resizeRenderer() {
-    const width = container.clientWidth;
-    const height = container.clientHeight;
-    renderer.setSize(width, height);
-    camera.aspect = width / height;
+    const totalWidth = wrapper.clientWidth;
+    const totalHeight = window.innerHeight; // Use viewport height as reference
+    const leftWidth = leftText ? leftText.offsetWidth : 0;
+    const rightWidth = rightText ? rightText.offsetWidth : 0;
+    const logoHeight = logo ? logo.offsetHeight : 0;
+    const topHeight = topText ? topText.offsetHeight : 0;
+    const bottomHeight = bottomText ? bottomText.offsetHeight : 0;
+    const padding = 40; // Account for grid gap and padding
+
+    // Calculate available width and height for canvas
+    const canvasWidth = totalWidth - leftWidth - rightWidth;
+    const canvasHeight = totalHeight - logoHeight - topHeight - bottomHeight - padding;
+
+    // Set container dimensions
+    container.style.width = `${canvasWidth}px`;
+    container.style.height = `${canvasHeight}px`;
+
+    // Update renderer and camera
+    renderer.setSize(canvasWidth, canvasHeight);
+    camera.aspect = canvasWidth / canvasHeight;
     camera.updateProjectionMatrix();
 }
+
+// Initial resize and listen for changes
+resizeRenderer();
 window.addEventListener('resize', resizeRenderer);
-resizeRenderer(); // Initial call
+
+// Watch for content changes in all text/logo elements
+const observer = new MutationObserver(resizeRenderer);
+[logo, topText, leftText, rightText, bottomText].forEach(element => {
+    if (element) observer.observe(element, { childList: true, subtree: true, characterData: true });
+});
 
 // Animation loop
 function animate() {
     requestAnimationFrame(animate);
-    controls.update(); // Update controls
+    controls.update();
+    renderer.clear();
     renderer.render(scene, camera);
 }
 animate();
