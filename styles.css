@@ -23,7 +23,8 @@ body {
 
 #logo {
     grid-area: logo;
-    text-align: center;
+    display: flex;
+    justify-content: flex-end;
     padding: 10px;
 }
 
