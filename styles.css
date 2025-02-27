@@ -1,100 +1,113 @@
-body {
+* {
     margin: 0;
-    background-color: white;
-    font-family: 'Arial', sans-serif;
-    display: grid;
-    grid-template-areas:
-        "top logo"
-        "left model right"
-        "bottom . .";
-    grid-template-columns: 25% auto 25%;
-    grid-template-rows: auto auto auto;
-    height: 100vh;
-    grid-gap: 10px;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-canvas {
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+header {
+    position: relative;
     width: 100%;
-
-    height: 100%;
-    display: block;
+    padding: 10px;
 }
 
-#logo {
-    grid-area: logo;
-    width: 15vw;
+.logo {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    max-width: 100px;
     height: auto;
-    justify-self: end;
-    align-self: start;
-    margin: 10px;
 }
 
-#container {
-    grid-area: model;
-    justify-self: center;
-    align-self: center;
-    padding: 5px;
-    margin: 5px;
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
 }
 
-#text-top {
-    grid-area: top;
+.text-top {
+    font-size: 2.5rem;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.middle-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px 0;
+}
+
+.text-left, .text-right {
+    flex: 1;
+    font-size: 1.5rem;
     text-align: center;
     padding: 20px;
-    font-family: 'Arial Black', sans-serif;
 }
 
-#text-left {
-    grid-area: left;
-    padding: 20px;
+.threejs-container {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#canvas-container {
+    width: 100%;
+    max-width: 500px;
+    height: 400px;
+    background-color: #ffffff;
+}
+
+.text-bottom {
+    font-size: 1.5rem;
+    margin-top: 10px;
     text-align: center;
-    align-self: center;
-    font-family: 'Arial Black', sans-serif;
 }
 
-#text-right {
-    grid-area: right;
-    padding: 20px;
-    text-align: center;
-    align-self: center;
-    font-family: 'Arial Black', sans-serif;
-}
-
-#text-bottom {
-    grid-area: bottom;
-    text-align: center;
-    padding: 20px;
-    font-family: 'Arial Black', sans-serif;
-}
-
-/* Responsive adjustments */
+/* Responsive Design */
 @media (max-width: 768px) {
-    body {
-        grid-template-areas:
-            "logo"
-            "top"
-            "model"
-            "left"
-            "right"
-            "bottom";
-        grid-template-columns: 100%;
-        grid-template-rows: auto auto auto auto auto auto;
+    .logo {
+        max-width: 80px;
     }
-
-    #logo {
-        width: 25vw;
-        justify-self: end;
+    .text-top {
+        font-size: 2rem;
     }
-
-    #text-top,
-    #text-left,
-    #text-right,
-    #text-bottom {
+    .middle-section {
+        flex-direction: column;
+    }
+    .text-left, .text-right {
+        font-size: 1.2rem;
         padding: 10px;
-        text-align: center;
     }
+    #canvas-container {
+        max-width: 100%;
+        height: 300px;
+    }
+    .text-bottom {
+        font-size: 1.2rem;
+    }
+}
 
-    #container {
-        justify-self: center;
+@media (max-width: 480px) {
+    .logo {
+        max-width: 60px;
+    }
+    .text-top {
+        font-size: 1.5rem;
+    }
+    .text-left, .text-right {
+        font-size: 1rem;
+    }
+    #canvas-container {
+        height: 200px;
     }
 }

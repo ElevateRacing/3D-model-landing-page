@@ -1,56 +1,77 @@
-// script.js
-const container = document.getElementById('container');
+// Set up the scene, camera, and renderer
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000); // Aspect ratio set later
 const renderer = new THREE.WebGLRenderer();
-renderer.setClearColor(0xffffff);
-renderer.setSize(window.innerWidth, window.innerHeight);
+const container = document.getElementById('canvas-container');
+
+// Adjust renderer size to container
+renderer.setSize(container.clientWidth, container.clientHeight);
 container.appendChild(renderer.domElement);
 
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
-
-// Restrict zoom
-//controls.minDistance = 5; // Minimum zoom distance
-//controls.maxDistance = 20; // Maximum zoom distance
-
-const loader = new THREE.OBJLoader();
-loader.load('FreeCad_98.obj', function (object) {
-    scene.add(object);
-    const boundingBox = new THREE.Box3().setFromObject(object);
-    const center = boundingBox.getCenter(new THREE.Vector3());
-    object.position.sub(center);
-
-    // Adjust model scale (if needed)
-    object.scale.set(0.2, 0.2, 0.2); // Example: Scale down by 50%
-
-    // Adjust camera position
-    camera.position.z = boundingBox.getSize(new THREE.Vector3()).length() * 1.5;
-
-    // Further adjust camera position if needed
-    if(camera.position.z > 20){
-        camera.position.z = 20;
-    }
-
-    controls.update();
-});
-
-const ambientLight = new THREE.AmbientLight(0x404040);
+// Add lighting (needed for visibility of OBJ without materials)
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Soft light
 scene.add(ambientLight);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5); // Direct light
+directionalLight.position.set(0, 1, 1);
+scene.add(directionalLight);
 
-const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
-scene.add( directionalLight );
+// Load the OBJ file
+const loader = new THREE.OBJLoader();
+loader.load(
+    'FreeCad_98.obj', // Replace with your OBJ file's name
+    (object) => {
+        // Apply a basic material if no material is provided
+        object.traverse((child) => {
+            if (child.isMesh) {
+                child.material = new THREE.MeshStandardMaterial({ color: 0x00ff00 }); // Green color
+            }
+        });
 
+        // Center and scale the model
+        const box = new THREE.Box3().setFromObject(object);
+        const center = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const scale = 2 / maxDim; // Adjust scale to fit nicely
+        object.scale.set(scale, scale, scale);
+        object.position.sub(center.multiplyScalar(scale)); // Center it
+
+        scene.add(object);
+    },
+    (xhr) => {
+        console.log((xhr.loaded / xhr.total * 100) + '% loaded'); // Progress
+    },
+    (error) => {
+        console.error('An error occurred loading the OBJ:', error);
+    }
+);
+
+// Position camera
+camera.position.z = 5;
+
+// Add OrbitControls for interaction
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+controls.screenSpacePanning = false;
+controls.minDistance = 2;
+controls.maxDistance = 10;
+
+// Handle window resize
+function resizeRenderer() {
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    renderer.setSize(width, height);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+}
+window.addEventListener('resize', resizeRenderer);
+resizeRenderer(); // Initial call
+
+// Animation loop
 function animate() {
     requestAnimationFrame(animate);
-    controls.update();
+    controls.update(); // Update controls
     renderer.render(scene, camera);
 }
 animate();
-
-window.addEventListener('resize', onWindowResize, false);
-
-function onWindowResize(){
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize( window.innerWidth, window.innerHeight );
-}

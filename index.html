@@ -1,20 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>3D Model Viewer</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My 3D Landing Page</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <img id="logo" src="logo.png" alt="Logo">
-    <div id="text-top">Top Text Here</div>
-    <div id="text-left">Left text Here</div>
-    <div id="container"></div>
-    <div id="text-right">Right text Here</div>
-    <div id="text-bottom">Bottom text Here</div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://unpkg.com/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
-    <script src="https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <header>
+        <img src="logo.png" alt="Logo" class="logo">
+    </header>
+    <main>
+        <h1 class="text-top">text top</h1>
+        <section class="middle-section">
+            <div class="text-left">Text left</div>
+            <div class="threejs-container">
+                <div id="canvas-container"></div>
+                <div class="text-bottom">text bottom</div>
+            </div>
+            <div class="text-right">Text right</div>
+        </section>
+    </main>
+    <!-- Load Three.js, OrbitControls, and OBJLoader -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134/examples/js/loaders/OBJLoader.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
