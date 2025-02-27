@@ -8,26 +8,25 @@ const container = document.getElementById('canvas-container');
 renderer.setSize(container.clientWidth, container.clientHeight);
 container.appendChild(renderer.domElement);
 
-// Add enhanced lighting setup
 // Ambient light for base illumination
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.4); // Soft base light
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Soft base light
 scene.add(ambientLight);
 
 // Multiple directional lights for even coverage
-const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.7); // Primary light
-directionalLight1.position.set(5, 10, 5); // Above and to the side
+const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.4); // Primary light
+directionalLight1.position.set(5, 10, 5); // Above and to the side (front-right)
 scene.add(directionalLight1);
 
-const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.5); // Secondary light
-directionalLight2.position.set(-5, 5, -5); // Opposite direction
+const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.6); // Secondary light
+directionalLight2.position.set(-5, 5, -5); // Opposite direction (back-left)
 scene.add(directionalLight2);
 
 const directionalLight3 = new THREE.DirectionalLight(0xffffff, 0.3); // Fill light
-directionalLight3.position.set(0, -5, 5); // From below
+directionalLight3.position.set(0, -5, 5); // From below-front
 scene.add(directionalLight3);
 
 // Optional: Add a point light for extra brightness
-const pointLight = new THREE.PointLight(0xffffff, 0.5, 50); // Omni-directional light
+const pointLight = new THREE.PointLight(0xffffff, 0.3, 50); // Omni-directional light
 pointLight.position.set(0, 5, 5); // Near the object
 scene.add(pointLight);
 
