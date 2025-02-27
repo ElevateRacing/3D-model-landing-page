@@ -6,6 +6,7 @@ const container = document.getElementById('canvas-container');
 
 // Adjust renderer size to container
 renderer.setSize(container.clientWidth, container.clientHeight);
+renderer.setClearColor(0xffffff, 1);
 container.appendChild(renderer.domElement);
 
 // Ambient light for base illumination
