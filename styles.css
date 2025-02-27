@@ -10,9 +10,9 @@ canvas {
 }
 #logo {
     position: absolute;
-    top: 50px;
-    right: 50px;
-    width: 200px;
+    top: 30px;
+    right: 30px;
+    width: 150px;
     height: auto;
 }
 #text-overlay {
