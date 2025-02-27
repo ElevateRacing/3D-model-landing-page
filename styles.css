@@ -12,7 +12,7 @@ canvas {
     position: absolute;
     top: 30px;
     right: 30px;
-    width: 100px;
+    width: 10vw; /* vw is % of the viewport width */
     height: auto;
 }
 #text-overlay {
@@ -21,10 +21,17 @@ canvas {
     left: 50%;
     transform: translateX(-50%);
     color: black;
-    font-size: 34px;
+    font-size: 4vw;
     font-family: 'Arial Black', sans-serif;
     white-space: nowrap;
 }
+
+@media (max-width: 768px){
+    #text-overlay {
+        font-size: 6vw;
+    }
+}
+
 @font-face {
     font-family: 'FORMULA1-BOLD';
     src: url('FORMULA1-BOLD.otf') format('opentype');
