@@ -39,7 +39,7 @@ scene.add(pointLight);
 
 const loader = new ThreeMFLoader();
 loader.load(
-    'models/Mono.3mf',
+    '/models/Mono.3mf',
     function (object) {
         object.scale.set(1, 1, 1);
         object.position.set(0, 0, 0);
