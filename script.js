@@ -36,38 +36,22 @@ const pointLight = new THREE.PointLight(0xffffff, 0.3, 50);
 pointLight.position.set(0, 5, 5);
 scene.add(pointLight);
 
-// Load the 3MF file (replacing OBJLoader with ThreeMFLoader)
-import { ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader.js'; // Add this import
-
-const loader = new ThreeMFLoader();
+// Load the 3MF model
+const loader = new THREE.ThreeMFLoader();
 loader.load(
-    'Mono.3mf', // Update to your .3mf file name
-    (object) => {
-        object.traverse((child) => {
-            if (child.isMesh) {
-                child.material = new THREE.MeshStandardMaterial({
-                    color: 0xb0b0b0,
-                    metalness: 0.9,
-                    roughness: 0.3
-                });
-            }
-        });
-
-        const box = new THREE.Box3().setFromObject(object);
-        const center = box.getCenter(new THREE.Vector3());
-        const size = box.getSize(new THREE.Vector3());
-        const maxDim = Math.max(size.x, size.y, size.z);
-        const scale = 2 / maxDim;
-        object.scale.set(scale, scale, scale);
-        object.position.sub(center.multiplyScalar(scale));
-
+    'models/Mono.3mf', // Path to your model
+    function (object) {
+        // Adjust model scale and position if needed
+        object.scale.set(1, 1, 1); // Adjust this if the model is too big/small
+        object.position.set(0, 0, 0); // Center the model
         scene.add(object);
+        console.log('Model loaded successfully!');
     },
-    (xhr) => {
+    function (xhr) {
         console.log((xhr.loaded / xhr.total * 100) + '% loaded');
     },
-    (error) => {
-        console.error('An error occurred loading the 3MF:', error);
+    function (error) {
+        console.error('An error occurred:', error);
     }
 );
 
