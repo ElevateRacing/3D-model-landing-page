@@ -1,4 +1,4 @@
-// Set up the scene, camera, and renderer
+// Set up the scene, camera, and renderer (unchanged)
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -16,7 +16,7 @@ renderer.setClearColor(0xffffff, 1); // White background
 renderer.autoClear = true;
 container.appendChild(renderer.domElement);
 
-// Add balanced lighting setup
+// Add balanced lighting setup (unchanged)
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
 
@@ -41,7 +41,7 @@ import { ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader.js'; // Add 
 
 const loader = new ThreeMFLoader();
 loader.load(
-    'Mono.3mf', // Update to your .3mf file name
+    'AirKart_v5.3mf', // Update to your .3mf file name
     (object) => {
         object.traverse((child) => {
             if (child.isMesh) {
@@ -74,7 +74,7 @@ loader.load(
 // Position camera
 camera.position.z = 5;
 
-// Add OrbitControls for interaction
+// Add OrbitControls for interaction (unchanged)
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.05;
@@ -82,14 +82,13 @@ controls.screenSpacePanning = false;
 controls.minDistance = 2;
 controls.maxDistance = 10;
 
-// Handle resize based on surrounding elements
+// Handle resize based on surrounding elements (unchanged)
 function resizeRenderer() {
     const totalWidth = wrapper.clientWidth;
     const leftWidth = leftText ? leftText.offsetWidth : 0;
     const rightWidth = rightText ? rightText.offsetWidth : 0;
     const canvasWidth = totalWidth - leftWidth - rightWidth;
 
-    // Update renderer and camera
     renderer.setSize(canvasWidth, container.clientHeight);
     camera.aspect = canvasWidth / container.clientHeight;
     camera.updateProjectionMatrix();
