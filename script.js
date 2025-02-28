@@ -41,7 +41,7 @@ import { ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader.js'; // Add 
 
 const loader = new ThreeMFLoader();
 loader.load(
-    'AirKart_v5.3mf', // Update to your .3mf file name
+    'Mono.3mf', // Update to your .3mf file name
     (object) => {
         object.traverse((child) => {
             if (child.isMesh) {
