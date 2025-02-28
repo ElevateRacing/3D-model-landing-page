@@ -1,4 +1,7 @@
-// Set up the scene, camera, and renderer (unchanged)
+import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.module.js';
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.134/examples/js/controls/OrbitControls.js';
+import { ThreeMFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.149.0/examples/jsm/loaders/3MFLoader.js';
+
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -10,13 +13,11 @@ const bottomText = document.getElementById('bottom-text');
 const logo = document.getElementById('logo');
 const wrapper = document.getElementById('wrapper');
 
-// Initial renderer size
 renderer.setSize(container.clientWidth, container.clientHeight);
-renderer.setClearColor(0xffffff, 1); // White background
+renderer.setClearColor(0xffffff, 1);
 renderer.autoClear = true;
 container.appendChild(renderer.domElement);
 
-// Add balanced lighting setup (unchanged)
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
 
@@ -36,14 +37,12 @@ const pointLight = new THREE.PointLight(0xffffff, 0.3, 50);
 pointLight.position.set(0, 5, 5);
 scene.add(pointLight);
 
-// Load the 3MF model
-const loader = new THREE.ThreeMFLoader();
+const loader = new ThreeMFLoader();
 loader.load(
-    'models/Mono.3mf', // Path to your model
+    'models/Mono.3mf',
     function (object) {
-        // Adjust model scale and position if needed
-        object.scale.set(1, 1, 1); // Adjust this if the model is too big/small
-        object.position.set(0, 0, 0); // Center the model
+        object.scale.set(1, 1, 1);
+        object.position.set(0, 0, 0);
         scene.add(object);
         console.log('Model loaded successfully!');
     },
@@ -55,18 +54,15 @@ loader.load(
     }
 );
 
-// Position camera
 camera.position.z = 5;
 
-// Add OrbitControls for interaction (unchanged)
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.05;
 controls.screenSpacePanning = false;
 controls.minDistance = 2;
 controls.maxDistance = 10;
 
-// Handle resize based on surrounding elements (unchanged)
 function resizeRenderer() {
     const totalWidth = wrapper.clientWidth;
     const leftWidth = leftText ? leftText.offsetWidth : 0;
@@ -78,17 +74,14 @@ function resizeRenderer() {
     camera.updateProjectionMatrix();
 }
 
-// Initial resize and listen for changes
 resizeRenderer();
 window.addEventListener('resize', resizeRenderer);
 
-// Watch for content changes in all text/logo elements
 const observer = new MutationObserver(resizeRenderer);
 [logo, topText, leftText, rightText, bottomText].forEach(element => {
     if (element) observer.observe(element, { childList: true, subtree: true, characterData: true });
 });
 
-// Animation loop
 function animate() {
     requestAnimationFrame(animate);
     controls.update();
