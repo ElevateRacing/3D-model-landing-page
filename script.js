@@ -36,10 +36,12 @@ const pointLight = new THREE.PointLight(0xffffff, 0.3, 50);
 pointLight.position.set(0, 5, 5);
 scene.add(pointLight);
 
-// Load the OBJ file
-const loader = new THREE.OBJLoader();
+// Load the 3MF file (replacing OBJLoader with ThreeMFLoader)
+import { ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader.js'; // Add this import
+
+const loader = new ThreeMFLoader();
 loader.load(
-    'AirKart v5.obj',
+    'Mono.3mf', // Update to your .3mf file name
     (object) => {
         object.traverse((child) => {
             if (child.isMesh) {
@@ -65,7 +67,7 @@ loader.load(
         console.log((xhr.loaded / xhr.total * 100) + '% loaded');
     },
     (error) => {
-        console.error('An error occurred loading the OBJ:', error);
+        console.error('An error occurred loading the 3MF:', error);
     }
 );
 
