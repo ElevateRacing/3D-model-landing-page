@@ -39,7 +39,7 @@ scene.add(pointLight);
 // Load the OBJ file
 const loader = new THREE.OBJLoader();
 loader.load(
-    'FreeCad_98.obj',
+    'AirKart v5.obj',
     (object) => {
         object.traverse((child) => {
             if (child.isMesh) {
